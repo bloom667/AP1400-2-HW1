@@ -3,11 +3,23 @@
 #include <gtest/gtest.h>
 #include "hw1.h"
 
+std::ostream& operator<<(std::ostream& os, const algebra::Matrix& matrix) {
+    for (const auto& row : matrix) {
+        for (const auto& val : row) {
+            os << val << " ";
+        }
+        os << std::endl;
+    }
+    return os;
+}
+
 int main(int argc, char **argv)
 {
     if (true) // make false to run unit-tests
     {
         // debug section
+        algebra::Matrix a = algebra::zeros(2, 2);
+        std::cout << a;
     }
     else
     {
