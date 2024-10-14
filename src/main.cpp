@@ -20,9 +20,9 @@ int main(int argc, char **argv)
         // debug section
         algebra::Matrix a = algebra::random(2, 2, 2.34, 4.56);
         algebra::show(a);
-        algebra::Matrix b = algebra::multiply(a, 2.323);
+        algebra::Matrix b = algebra::sum(a, 2);
         std::cout << b;
-        algebra::Matrix c = algebra::multiply(a,b);
+        algebra::Matrix c = algebra::sum(a,b);
         std::cout << c;
     }
     else

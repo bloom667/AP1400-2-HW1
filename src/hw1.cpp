@@ -92,4 +92,37 @@ namespace algebra{
         return res;
     }
 
+    Matrix sum(const Matrix& matrix, double c){
+        Matrix res;
+        for(const auto& row: matrix){
+            vector<double> rows;
+            for(const auto& x: row){
+                double temp = x+c;
+                rows.push_back(temp);
+            }
+            res.push_back(rows);
+        }
+        return res;
+    }
+
+    Matrix sum(const Matrix& matrix1, const Matrix& matrix2){
+        int row1 = matrix1.size();
+        int col1 = matrix1[0].size();
+        int row2 = matrix2.size();
+        int col2 = matrix2[0].size();
+        if(row1 != row2 && col1 != col2){
+            throw logic_error("invalid matrix format");
+        }
+        Matrix res;
+        for(int k = 0; k < row1; k++){
+            vector<double> rows;
+            for(int i = 0; i < col1; i++){
+                double sum = matrix1[k][i] + matrix2[k][i];
+                rows.push_back(sum);
+            }
+            res.push_back(rows);
+        }
+        return res;
+    }
+
 }
