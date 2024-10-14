@@ -55,5 +55,41 @@ namespace algebra{
         }
     }
 
+    Matrix multiply(const Matrix& matrix, double c){
+        Matrix res;
+        for(const auto& row: matrix){
+            vector<double> rows;
+            for(const auto& x: row){
+                double temp = x*c;
+                rows.push_back(temp);
+            }
+            res.push_back(rows);
+        }
+        return res;
+    }
+
+    Matrix multiply(const Matrix& matrix1, const Matrix& matrix2){
+        int row1 = matrix1.size();
+        int col1 = matrix1[0].size();
+        int row2 = matrix2.size();
+        int col2 = matrix2[0].size();
+        if(col1 != row2){
+            throw logic_error("invalid matrix format");
+        }
+        Matrix res;
+        for(int k = 0; k < row1; k++){
+            vector<double> rows;
+            for(int i = 0; i < col2; i++){
+                double sum = 0;
+                for(int j = 0; j < col1; j++){
+                    double element = matrix1[k][j]*matrix2[j][i];
+                    sum += element;
+                }
+                rows.push_back(sum);
+            }
+            res.push_back(rows);
+        }
+        return res;
+    }
 
 }

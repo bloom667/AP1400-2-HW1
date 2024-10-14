@@ -8,6 +8,8 @@ namespace algebra{
     Matrix ones(std::size_t n, std::size_t m);
     Matrix random(std::size_t n, std::size_t m, double min, double max);
     void show(const Matrix& matrix);
+    Matrix multiply(const Matrix& matrix, double c);
+    Matrix multiply(const Matrix& matrix1, const Matrix& matrix2);
 }
 
 
