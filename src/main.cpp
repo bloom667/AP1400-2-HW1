@@ -18,8 +18,8 @@ int main(int argc, char **argv)
     if (true) // make false to run unit-tests
     {
         // debug section
-        algebra::Matrix a = algebra::zeros(2, 2);
-        std::cout << a;
+        algebra::Matrix a = algebra::random(2, 2, 2.34, 4.56);
+        algebra::show(a);
     }
     else
     {
