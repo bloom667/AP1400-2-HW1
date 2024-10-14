@@ -12,6 +12,8 @@ namespace algebra{
     Matrix multiply(const Matrix& matrix1, const Matrix& matrix2);
     Matrix sum(const Matrix& matrix, double c);
     Matrix sum(const Matrix& matrix1, const Matrix& matrix2);
+    Matrix transpose(const Matrix& matrix);
+    Matrix minor(const Matrix& matrix, std::size_t n, std::size_t m);
 }
 
 

@@ -18,12 +18,10 @@ int main(int argc, char **argv)
     if (true) // make false to run unit-tests
     {
         // debug section
-        algebra::Matrix a = algebra::random(2, 2, 2.34, 4.56);
+        algebra::Matrix a = algebra::random(3, 3, 2.34, 4.56);
         algebra::show(a);
-        algebra::Matrix b = algebra::sum(a, 2);
+        algebra::Matrix b = algebra::minor(a, 1, 1);
         std::cout << b;
-        algebra::Matrix c = algebra::sum(a,b);
-        std::cout << c;
     }
     else
     {

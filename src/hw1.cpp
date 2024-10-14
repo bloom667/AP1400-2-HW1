@@ -125,4 +125,34 @@ namespace algebra{
         return res;
     }
 
+    Matrix transpose(const Matrix& matrix){
+        int row = matrix.size();
+        int col = matrix[0].size();
+        Matrix res;
+        for(int i = 0; i < col; i++){
+            vector<double> rows;
+            for (int j = 0; j < row; j ++){
+                rows.push_back(matrix[j][i]);
+            }
+            res.push_back(rows);
+        }
+        return res;
+    }
+
+    Matrix minor(const Matrix& matrix, size_t n, size_t m){
+        int row = matrix.size();
+        int col = matrix[0].size();
+        Matrix res;
+        for(int i = 0; i < row; i++){
+            if(i == n) continue;
+            vector<double> rows;
+            for (int j = 0; j < col; j ++){
+                if(j == m) continue;
+                rows.push_back(matrix[i][j]);
+            }
+            res.push_back(rows);
+        }
+        return res;
+    }
+
 }
