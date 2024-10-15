@@ -251,4 +251,39 @@ namespace algebra{
         return res;
     }
 
+    Matrix concatenate(const Matrix& matrix1, const Matrix& matrix2, int axis){
+        if(axis != 1 && axis != 0){
+            cout << axis;
+            throw logic_error("invalid axis input");
+        }
+
+        int row1 = matrix1.size();
+        int col1 = matrix1[0].size();
+        int row2 = matrix2.size();
+        int col2 = matrix2[0].size();
+
+        if(axis == 1 && row1 != row2 ){
+            throw logic_error("invalid matrix input");
+        }              
+
+        Matrix res;
+
+        if(axis == 0){
+            for(int i = 0; i < row1; i++){
+                res.push_back(matrix1[i]);
+            }
+            for(int i = 0; i < row2; i++){
+                res.push_back(matrix2[i]);
+            }
+        }else{
+            res = matrix1;
+            for(int i = 0; i < row1; i++){
+                for(int j = 0; j < col2; j++){
+                    res[i].push_back(matrix2[i][j]);
+                }
+            }
+        }
+        return res;
+    }
+
 }

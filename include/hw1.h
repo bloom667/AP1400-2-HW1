@@ -18,6 +18,7 @@ namespace algebra{
     Matrix augmented(const Matrix& matrix);
     Matrix div_augmented(const Matrix& matrix);
     Matrix inverse(const Matrix& matrix);
+    Matrix concatenate(const Matrix& matrix1, const Matrix& matrix2, int axis);
 }
 
 

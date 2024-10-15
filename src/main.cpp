@@ -20,8 +20,12 @@ int main(int argc, char **argv)
         // debug section
         algebra::Matrix a = algebra::random(3, 3, 2.34, 4.56);
         algebra::show(a);
-        algebra::Matrix b = algebra::inverse(a);
-        std::cout << b;
+        algebra::Matrix b = algebra::random(3, 3, 2.34, 4.56);
+        algebra::show(b);
+        algebra::Matrix c = algebra::concatenate(a,b,1);
+        algebra::Matrix d = algebra::concatenate(a,b,0);
+        std::cout << c << std::endl;
+        std::cout << d << std::endl;
     }
     else
     {
