@@ -4,6 +4,7 @@
 #include <random>
 #include <ctime>
 #include <iomanip>
+#include <cmath>
 using namespace std;
 
 namespace algebra{
@@ -157,7 +158,7 @@ namespace algebra{
 
     double determinant(const Matrix& matrix){
         int row = matrix.size();
-        int col = matrix.size();
+        int col = matrix[0].size();
         if(row != col){
             throw logic_error("invalid matrix format");
         }
@@ -175,6 +176,78 @@ namespace algebra{
             double minorDet = algebra::determinant(minor);
             res += (i%2 == 0? 1: -1)*matrix[0][i]*minorDet; 
         }
+        return res;
+    }
+
+    Matrix augmented(const Matrix& matrix){
+        int row = matrix.size();
+        int col = matrix[0].size();
+        if(row != col){
+            throw logic_error("invalid matrix format");
+        }
+        Matrix res = matrix;
+        for(int i = 0; i < row; i++){
+            for(int j = 0; j < col; j++){
+                if(j == i) res[i].push_back(1.0);
+                else res[i].push_back(0.0);
+            }
+        }
+        return res;
+    }
+
+    Matrix div_augmented(const Matrix& matrix){
+        int row = matrix.size();
+        int col = matrix[0].size();
+        if(col != 2*row){
+            throw logic_error("invalid matrix format");
+        }
+        Matrix res;
+        for(int i = 0; i < row; i++){
+            vector<double> rows;
+            for(int j = row; j < col; j++){
+                rows.push_back(matrix[i][j]);
+            }
+            res.push_back(rows);
+        }
+        return res;
+    }
+
+    Matrix inverse(const Matrix& matrix){
+        int row = matrix.size();
+        int col = matrix[0].size();
+        Matrix augmented = algebra::augmented(matrix);
+        for(int i = 0; i < row; i++){
+            if(fabs(augmented[i][i]) < 1e-9){//交换行避免主元为0
+                bool found = false;
+                for(int j = i+1; j < row; j++){
+                    if(fabs(augmented[j][i]) > 1e-9){
+                        augmented[i].swap(augmented[j]);
+                    }
+                    found = true;
+                    break;
+                }
+                if(!found){
+                    throw logic_error("Matrix is singular and cannot be inverted");
+                }
+            }
+
+            //主元所在行归一化处理
+            double pivot = augmented[i][i];
+            for(auto& val : augmented[i]){
+                val /= pivot;
+            }
+
+            //将主元外的元素化为0
+            for(int k = 0; k < row; k++){
+                if (k == i) continue;
+                double factor = augmented[k][i];
+                for(int x = 0; x < 2*row; x++){
+                    augmented[k][x] -= factor*augmented[i][x];
+                }
+            }
+        }
+
+        Matrix res = algebra::div_augmented(augmented);
         return res;
     }
 

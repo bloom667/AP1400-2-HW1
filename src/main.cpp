@@ -20,7 +20,7 @@ int main(int argc, char **argv)
         // debug section
         algebra::Matrix a = algebra::random(3, 3, 2.34, 4.56);
         algebra::show(a);
-        double b = algebra::determinant(a);
+        algebra::Matrix b = algebra::inverse(a);
         std::cout << b;
     }
     else
