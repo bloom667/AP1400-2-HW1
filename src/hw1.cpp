@@ -155,4 +155,27 @@ namespace algebra{
         return res;
     }
 
+    double determinant(const Matrix& matrix){
+        int row = matrix.size();
+        int col = matrix.size();
+        if(row != col){
+            throw logic_error("invalid matrix format");
+        }
+        if(row == 1){
+            return matrix[0][0];
+        }
+
+        if(row == 2){
+            return matrix[0][0]*matrix[1][1] - matrix[1][0]*matrix[0][1];
+        }
+
+        double res = 0;
+        for(int i = 0; i < row; i++){
+            Matrix minor = algebra::minor(matrix, 0, i);
+            double minorDet = algebra::determinant(minor);
+            res += (i%2 == 0? 1: -1)*matrix[0][i]*minorDet; 
+        }
+        return res;
+    }
+
 }
